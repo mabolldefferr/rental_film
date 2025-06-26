@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Daftar Pelanggan</h1>
+
+<a href="{{ url_for('customer.add') }}" class="btn btn-primary mb-3">+ Tambah Pelanggan</a>
+
+<table class="table-auto w-full border">
+  <thead>
+    <tr>
+      <th>Nama</th>
+      <th>Email</th>
+      <th>Telepon</th>
+      <th>Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for c in customers %}
+    <tr>
+      <td>{{ c.name }}</td>
+      <td>{{ c.email }}</td>
+      <td>{{ c.phone }}</td>
+      <td>
+        <a href="{{ url_for('customer.edit', id=c.id) }}" class="text-blue-500">Edit</a> |
+        <form action="{{ url_for('customer.delete', id=c.id) }}" method="POST" style="display:inline;">
+          <button onclick="return confirm('Yakin?')" class="text-red-500">Hapus</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

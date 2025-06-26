@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Daftar Genre Film</h1>
+
+<a href="{{ url_for('genre.add') }}" class="btn btn-primary mb-3">+ Tambah Genre</a>
+
+<table class="table-auto w-full border">
+  <thead>
+    <tr>
+      <th>Nama Genre</th>
+      <th>Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for g in genres %}
+    <tr>
+      <td>{{ g.name }}</td>
+      <td>
+        <a href="{{ url_for('genre.edit', id=g.id) }}" class="text-blue-500">Edit</a> |
+        <form action="{{ url_for('genre.delete', id=g.id) }}" method="POST" style="display:inline;">
+          <button onclick="return confirm('Yakin?')" class="text-red-500">Hapus</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

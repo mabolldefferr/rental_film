@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Login Admin</h1>
+
+<form method="POST">
+  <label>Username</label><br>
+  <input type="text" name="username" required><br><br>
+
+  <label>Password</label><br>
+  <input type="password" name="password" required><br><br>
+
+  <button type="submit" class="btn btn-success">Login</button>
+</form>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Daftar Transaksi Penyewaan</h1>
+
+<a href="{{ url_for('rental.add') }}" class="btn btn-primary mb-3">+ Tambah Transaksi</a>
+
+<table class="table-auto w-full border">
+  <thead>
+    <tr>
+      <th>Pelanggan</th>
+      <th>Film</th>
+      <th>Tanggal Pinjam</th>
+      <th>Tanggal Kembali</th>
+      <th>Total Harga</th>
+      <th>Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in rentals %}
+    <tr>
+      <td>{{ r.customer.name }}</td>
+      <td>{{ r.movie.title }}</td>
+      <td>{{ r.rent_date.strftime('%Y-%m-%d') }}</td>
+      <td>{{ r.return_date.strftime('%Y-%m-%d') }}</td>
+      <td>Rp {{ '%.2f'|format(r.total_price) }}</td>
+      <td>
+        <form action="{{ url_for('rental.delete', id=r.id) }}" method="POST" style="display:inline;">
+          <button onclick="return confirm('Yakin?')" class="text-red-500">Hapus</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

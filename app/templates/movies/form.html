@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">
+  {% if movie %}Edit{% else %}Tambah{% endif %} Film
+</h1>
+
+<form method="POST">
+  <label>Judul</label>
+  <input type="text" name="title" value="{{ movie.title if movie else '' }}" required><br>
+
+  <label>Tahun Rilis</label>
+  <input type="number" name="release_year" value="{{ movie.release_year if movie else '' }}"><br>
+
+  <label>Stok</label>
+  <input type="number" name="stock" value="{{ movie.stock if movie else '' }}"><br>
+
+  <label>Harga Sewa</label>
+  <input type="number" step="0.01" name="price" value="{{ movie.price if movie else '' }}"><br>
+
+  <label>Genre</label>
+  <select name="genre_id" required>
+    {% for genre in genres %}
+    <option value="{{ genre.id }}" {% if movie and movie.genre_id == genre.id %}selected{% endif %}>
+      {{ genre.name }}
+    </option>
+    {% endfor %}
+  </select><br>
+
+  <button type="submit" class="btn btn-success">Simpan</button>
+</form>
+{% endblock %}

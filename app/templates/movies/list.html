@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Daftar Film</h1>
+
+<a href="{{ url_for('movie.add') }}" class="btn btn-primary mb-3">+ Tambah Film</a>
+
+<table class="table-auto w-full border">
+  <thead>
+    <tr>
+      <th>Judul</th>
+      <th>Genre</th>
+      <th>Tahun</th>
+      <th>Stok</th>
+      <th>Harga</th>
+      <th>Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for movie in movies %}
+    <tr>
+      <td>{{ movie.title }}</td>
+      <td>{{ movie.genre.name }}</td>
+      <td>{{ movie.release_year }}</td>
+      <td>{{ movie.stock }}</td>
+      <td>{{ movie.price }}</td>
+      <td>
+        <a href="{{ url_for('movie.edit', id=movie.id) }}" class="text-blue-500">Edit</a> |
+        <form action="{{ url_for('movie.delete', id=movie.id) }}" method="POST" style="display:inline;">
+          <button onclick="return confirm('Yakin?')" class="text-red-500">Hapus</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
