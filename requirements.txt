@@ -1,2 +1,6 @@
-xhtml2pdf
+flask
+flask_sqlalchemy
+flask_login
+flask_migrate
 gunicorn
+xhtml2pdf
